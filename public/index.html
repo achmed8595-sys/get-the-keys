@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>KeyLibrary — Les tonalités de tes favoris Spotify</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script defer type="module" src="/app.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">♫</span><span>key<span class="brand-accent">library</span></span></div>
+      <div class="account" id="account" hidden>
+        <span class="account-name" id="account-name"></span>
+        <button id="logout" class="button button-quiet button-small" type="button">Déconnexion</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="welcome" class="hero">
+        <div class="hero-icon">♬</div>
+        <p class="eyebrow">TA MUSIQUE, DÉCHIFFRÉE</p>
+        <h1>Retrouve la <em>tonalité</em><br>de tes morceaux préférés.</h1>
+        <p class="hero-description">Connecte ton compte Spotify pour voir tous les titres que tu as likés, avec leur tonalité musicale lorsqu'elle est disponible.</p>
+        <button id="login" class="button button-primary button-large" type="button"><span class="spotify-dot">●</span> Se connecter avec Spotify</button>
+        <p class="footnote">Lecture seule. Nous ne modifions pas ta bibliothèque Spotify.</p>
+      </section>
+
+      <section id="dashboard" hidden>
+        <div class="dashboard-heading">
+          <div>
+            <p class="eyebrow">BIBLIOTHÈQUE PERSONNELLE</p>
+            <h1>Mes morceaux <em>likés.</em></h1>
+            <p class="subheading">Les tonalités sont recherchées dans la base FreqBlog. Certaines peuvent être indisponibles.</p>
+          </div>
+          <div class="heading-actions">
+            <button id="analyze" class="button button-primary" type="button">♯ Analyser les tonalités</button>
+            <button id="stop" class="button button-outline" type="button" hidden>Arrêter</button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="stat-label">Titres likés</div><strong id="stat-total">0</strong></div>
+          <div class="stat"><div class="stat-label">Tonalités trouvées</div><strong id="stat-found">0</strong></div>
+          <div class="stat"><div class="stat-label">Inconnues</div><strong id="stat-unknown">0</strong></div>
+        </div>
+        <div id="loading-panel" class="loading-panel" hidden>
+          <div class="progress-label"><span id="loading-label">Chargement...</span><span id="loading-numbers"></span></div>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+        <div class="library">
+          <div class="toolbar">
+            <label class="search-wrap">
+              <span class="sr-only">Rechercher parmi les morceaux</span>
+              <span class="search-icon">⌕</span>
+              <input id="search" type="search" placeholder="Rechercher un morceau, un artiste..." />
+            </label>
+            <label class="select-wrap"><span class="sr-only">Filtrer par tonalité</span>
+              <select id="filter"><option value="all">Toutes les tonalités</option><option value="unknown">Tonalité inconnue</option><option value="pending">Non analysés</option><option value="error">Erreurs</option></select>
+            </label>
+            <label class="select-wrap"><span class="sr-only">Trier les morceaux</span>
+              <select id="sort"><option value="date">Ajout récent</option><option value="title">Titre A → Z</option><option value="artist">Artiste A → Z</option><option value="key">Tonalité A → Z</option></select>
+            </label>
+          </div>
+          <div class="table-scroll">
+            <table class="tracks-table">
+              <thead><tr><th class="col-number">#</th><th>MORCEAU</th><th>ARTISTE</th><th>TONALITÉ</th></tr></thead>
+              <tbody id="track-list"></tbody>
+            </table>
+            <p id="empty-results" class="empty-results" hidden>Aucun morceau ne correspond à la recherche.</p>
+          </div>
+          <div class="library-footer"><span id="visible-count">0 titre</span><a href="https://freqblog.com/" target="_blank" rel="noopener noreferrer">Données de tonalité : FreqBlog ↗</a></div>
+        </div>
+        <p class="privacy-note">Pour trouver les tonalités, le titre et le nom de l’artiste sont transmis à FreqBlog. Les tonalités sont des estimations automatiques : certains morceaux peuvent rester inconnus.</p>
+      </section>
+
+      <div id="alert" class="alert" role="alert" hidden></div>
+    </main>
+    <footer class="site-footer">KeyLibrary · Projet personnel non affilié à Spotify · <a href="https://freqblog.com/" target="_blank" rel="noopener noreferrer">Source des tonalités : FreqBlog</a></footer>
+  </div>
+</body>
+</html>
